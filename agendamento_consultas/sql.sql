@@ -63,10 +63,18 @@ insert into agendamentos (medico_id, paciente_id, data_consulta, horario) values
 insert into status_agendamento (nome_status) values
 ('Ativo'), ('Cancelado');
 
-select m.nome, p.nome, a.data_consulta, a.horario, st.nome_status as status_agendamento
+select m.nome as medico, p.nome as paciente, a.data_consulta, a.horario, st.nome_status as status_agendamento
 from agendamentos a
 join medicos m on a.medico_id = m.id
 join pacientes p on a.paciente_id = p.id
 join status_agendamento st on a.status_agendamento = st.id
 
 use agendamento_consultas
+select * from especialidades
+select m.nome, m.crm, e.nome_especialidade
+from medicos m
+join especialidades e on m.especialidade_id = e.id
+
+join medicos m on a.medico_id = m.id
+join pacientes p on a.paciente_id = p.id
+join status_agendamento st on a.status_agendamento = st.id

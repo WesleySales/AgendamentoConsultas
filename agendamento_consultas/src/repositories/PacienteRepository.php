@@ -1,6 +1,5 @@
 <?php
-
-include_once './conexao/Conexao.php';
+include_once '../conexao/Conexao.php';
 
 class PacienteRepository {
     private $connection;

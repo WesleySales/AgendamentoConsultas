@@ -1,8 +1,8 @@
 <?php
 
-include_once './conexao/Conexao.php';
+include_once '../conexao/Conexao.php';
 
-class PacienteRepository {
+class MedicoRepository {
     private $connection;
 
     public function __construct($connection) {
@@ -25,7 +25,9 @@ class PacienteRepository {
 
     public static function findAll() {
         $pdo = Conexao::getConexao();
-        $stmt = $pdo->prepare("SELECT * FROM pacientes");
+        $stmt = $pdo->prepare("select m.id,m.nome, m.crm, e.nome_especialidade as especialidade
+                                from medicos m
+                                join especialidades e on m.especialidade_id = e.id");
         $stmt->execute();
         $results = $stmt->fetchAll();
         return $results;
@@ -39,6 +41,15 @@ class PacienteRepository {
         $result = $stmt->fetchAll();
 
         return "Paciente encontrado: " . $result;
+    }
+
+    public static function findEspecialidades() {
+        $pdo = Conexao::getConexao();
+        $stmt = $pdo->prepare("SELECT * FROM especialidades");
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+
+        return $results;
     }
 
     public static function delete($id) {
